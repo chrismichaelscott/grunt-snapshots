@@ -46,13 +46,17 @@ module.exports = function(grunt) {
           } else {
             newID = '';
           }
-          page.render(options.path + '/' + options.filename + newID + '.' + options.extension, function() {
-            page.close();
-            ph.exit();
-          });
+          
+          var delay = 5000;
+          setTimeout(function() {
+            page.render(options.path + '/' + options.filename + newID + '.' + options.extension, function() {
+              page.close();
+              ph.exit();
+            });
+          }, delay);
           setTimeout(function() { // set a timeout to make sure phantom is done finishing up
             done();
-          }, 1000);
+          }, 1000 + delay);
         });
       });
     });
